@@ -1,5 +1,6 @@
 const data = require('../../mock_data.json');
 const fs = require("fs");
+const { error } = require('console');
 
 async function getUsers() {
     return new Promise((resolve, reject) => {
@@ -37,5 +38,20 @@ async function putUserById(id_user, userData) {
     })
 }
 
+async function createUser(userData) {
+    return new Promise((resolve, reject) => {
+        userData.id = data.length + 1 + ""
+        userData.first_name = userData.first_name 
+        userData.last_name = userData.last_name 
+        userData.email = userData.email 
+        userData.gender = userData.gender 
+        userData.ip_address = userData.ip_address 
+        
+        data.push(userData)
+        console.log(userData)
+        resolve(userData);
+        fs.writeFileSync('mock_data.json', JSON.stringify(data, null, "\t"));
+    })
+}
 
-module.exports = {getUsers, getUserById, putUserById}
+module.exports = {getUsers, getUserById, putUserById, createUser}
