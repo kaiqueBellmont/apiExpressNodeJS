@@ -1,6 +1,6 @@
 const {getUsers, getUsersById, putUserById, createUser} = require('../src/controllers/userController');
 
-const router = require('express').Router()
+const router = require('express').Router();
 
 //User Routes
 router.get('/users', getUsers);

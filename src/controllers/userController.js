@@ -20,10 +20,10 @@ exports.getUsersById = async function (req, res, next) {
     }
 }
 
-exports.putUserById = async function (req, res, next) {
+exports.UpdateUser = async function (req, res, next) {
     // Validate request parameters, queries using express-validator
     try {
-        let user = await userService.putUserById(req.params.id, req.body)
+        let user = await userService.UpdateUser(req.params.id, req.body)
         return res.status(200).json(user);
     } catch (e) {
         return res.status(400).json({ status: 400, message: e.message });

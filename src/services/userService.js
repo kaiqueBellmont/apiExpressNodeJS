@@ -1,6 +1,6 @@
 const data = require('../../mock_data.json');
 const fs = require("fs");
-const { error } = require('console');
+
 
 async function getUsers() {
     return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ async function getUserById(id_user) {
     })
 }
 
-async function putUserById(id_user, userData) {
+async function UpdateUser(id_user, userData) {
     return new Promise((resolve, reject) => {
         let updatedUserData;
         for (const item of data) {
@@ -54,4 +54,4 @@ async function createUser(userData) {
     })
 }
 
-module.exports = {getUsers, getUserById, putUserById, createUser}
+module.exports = {getUsers, getUserById, UpdateUser, createUser}
