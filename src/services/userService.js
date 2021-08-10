@@ -68,7 +68,7 @@ async function createUser(userData) {
         data.push(userData)
         console.log(userData)
         resolve(userData);
-        fs.writeFileSync('../mock_data.json', JSON.stringify(data, null, "\t"));
+        fs.writeFileSync('mock_data.json', JSON.stringify(data, null, "\t"));
     })
 }
 
