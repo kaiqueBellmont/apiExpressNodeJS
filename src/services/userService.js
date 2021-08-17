@@ -23,6 +23,7 @@ Ai se fosse trocar para UserSequilizeRepository por exemplo, seria só trocar no
 
 const data = require('../../mock_data.json');
 const fs = require("fs");
+const fsAsync = require("fs/promises");
 
 
 async function getUsers() {
@@ -45,11 +46,12 @@ async function UpdateUser(id_user, userData) {
         let updatedUserData;
         for (const item of data) {
             if (item['id'] === id_user) {
-                item.first_name = userData.first_name ? userData.first_name : item.first_name
-                item.last_name = userData.last_name ? userData.last_name : item.last_name
-                item.email = userData.email ? userData.email : item.email
-                item.gender = userData.gender ? userData.gender : item.gender
-                item.ip_address = userData.ip_address ? userData.ip_address : item.ip_address
+                item['id'] = userData.id ? userData.id : ""
+                item.first_name = userData.first_name ? userData.first_name : ""
+                item.last_name = userData.last_name ? userData.last_name : ""
+                item.email = userData.email ? userData.email : ""
+                item.gender = userData.gender ? userData.gender : ""
+                item.ip_address = userData.ip_address ? userData.ip_address : ""
                 console.log(item)
                 updatedUserData = item
                 break
@@ -62,14 +64,14 @@ async function UpdateUser(id_user, userData) {
 }
 
 async function createUser(userData) {
-    return new Promise((resolve, reject) => {
-        userData.id = data.length + 1 + ""
+    
+    userData.id = data.length + 1 + ""
 
-        data.push(userData)
-        console.log(userData)
-        resolve(userData);
-        fs.writeFileSync('mock_data.json', JSON.stringify(data, null, "\t"));
-    })
+    data.push(userData)
+    console.log(userData)
+
+    await fsAsync.writeFile('mock_data.json', JSON.strngify(data, null, "\t"));
+    return userData
 }
 
 module.exports = {getUsers, getUserById, UpdateUser, createUser}
