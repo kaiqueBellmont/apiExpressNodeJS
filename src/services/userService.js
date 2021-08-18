@@ -66,11 +66,16 @@ async function UpdateUser(id_user, userData) {
 async function createUser(userData) {
     
     userData.id = data.length + 1 + ""
+    userData.first_name = userData.first_name 
+    userData.last_name = userData.last_name 
+    userData.email = userData.email 
+    userData.gender = userData.gender ? userData.gender : null
+    userData.ip_address = userData.ip_address ? userData.ip_address : null
 
     data.push(userData)
     console.log(userData)
 
-    await fsAsync.writeFile('mock_data.json', JSON.strngify(data, null, "\t"));
+    await fsAsync.writeFile('mock_data.json', JSON.stringify(data, null, "\t"));
     return userData
 }
 
