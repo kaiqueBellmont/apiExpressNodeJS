@@ -46,18 +46,17 @@ async function UpdateUser(id_user, userData) {
         let updatedUserData;
         for (const item of data) {
             if (item['id'] === id_user) {
-                item['id'] = userData.id ? userData.id : ""
-                item.first_name = userData.first_name ? userData.first_name : ""
-                item.last_name = userData.last_name ? userData.last_name : ""
-                item.email = userData.email ? userData.email : ""
-                item.gender = userData.gender ? userData.gender : ""
-                item.ip_address = userData.ip_address ? userData.ip_address : ""
+                item['id'] = userData.id ? userData.id : userData.id
+                item.first_name = userData.first_name 
+                item.last_name = userData.last_name 
+                item.email = userData.email 
+                item.gender = userData.gender ? userData.gender : null
+                item.ip_address = userData.ip_address ? userData.ip_address : null  
                 console.log(item)
                 updatedUserData = item
                 break
             }
         }
-        console.log("*******************")
         fs.writeFileSync('mock_data.json', JSON.stringify(data, null, "\t"));
         resolve(updatedUserData)
     })
