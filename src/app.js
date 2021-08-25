@@ -2,12 +2,12 @@ const express = require('express')
 const app = express()
 const routes = require('../src/../routes/userRoutes')
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-    res.send('Olá, este é o local host');
-});
+  res.send('Olá, este é o local host')
+})
 
 app.use('/api/v1/', routes)
 
