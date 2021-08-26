@@ -13,17 +13,11 @@ function validateData (body, res) {
 }
 
 function validateUpdateUser (req, res, next) {
-  const ID_ESPERADO = req.params.id
-  const ID_RECEBIDO = req.body.id
   const body = req.body
 
   try {
-    if ((ID_ESPERADO) === (ID_RECEBIDO)) {
-      validateData(body)
-      return next()
-    } else {
-      res.status(400).json({ status: 400, message: 'O id precisa ser identico ao da URI :' + ID_ESPERADO })
-    }
+    validateData(body)
+    return next()
   } catch (e) {
     res.status(400).json({ status: 400, message: e.message })
   }

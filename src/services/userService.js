@@ -8,6 +8,21 @@ async function getUsers () {
   })
 }
 
+async function isExistingId (idUser) {
+  return new Promise((resolve, reject) => {
+    for (const item of data) {
+      if (item.id === idUser) {
+        resolve(true)
+      }
+    }
+    for (const item of data) {
+      if (item.id !== idUser) {
+        resolve(false)
+      }
+    }
+  })
+}
+
 async function getUserById (idUser) {
   return new Promise((resolve, reject) => {
     for (const item of data) {
@@ -51,4 +66,4 @@ async function createUser (userData) {
   return userData
 }
 
-module.exports = { getUsers, getUserById, UpdateUser, createUser }
+module.exports = { getUsers, getUserById, UpdateUser, createUser, isExistingId }

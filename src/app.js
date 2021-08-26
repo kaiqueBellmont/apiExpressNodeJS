@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const routes = require('../src/../routes/userRoutes')
+const routes = require('../../apiExpressNodeJS/routes/userRoutes')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

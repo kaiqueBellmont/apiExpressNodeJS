@@ -3,8 +3,6 @@ const { getUsers, getUsersById, UpdateUser, createUser } = require('../src/contr
 
 const router = require('express').Router()
 
-// aqui teria um validate user
-
 // User Routes
 router.get('/users', getUsers)
 router.get('/users/:id', getUsersById)
