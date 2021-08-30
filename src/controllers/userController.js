@@ -13,13 +13,14 @@ exports.getUsers = async (req, res) => {
   }
 }
 
-exports.getUsersById = async (req, res) => {
+exports.getUsersById = async (req, res, next) => {
   const existingId = await userService.isExistingId(req.params.id)
 
   try {
     if (existingId) {
       const user = await userService.getUserById(req.params.id)
-      return res.status(201).json(user)
+      res.locals.user = user
+      return next()
     } else {
       return res.status(404).json({ status: 400, message: 'User not found' })
     }
