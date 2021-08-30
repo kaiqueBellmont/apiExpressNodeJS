@@ -1,69 +1,70 @@
-const data = require('../../mock_data.json')
-const fs = require('fs')
-const fsAsync = require('fs/promises')
+const data = require('../models/userModel')
 
-async function getUsers () {
+// const fsAsync = require('fs/promises')
+const users = data.users
+
+function getUsers () {
   return new Promise((resolve) => {
-    resolve(data)
+    resolve(users.findAll())
   })
 }
 
-async function isExistingId (idUser) {
-  return new Promise((resolve, reject) => {
-    for (const item of data) {
-      if (item.id === idUser) {
-        resolve(true)
-      }
-    }
-    for (const item of data) {
-      if (item.id !== idUser) {
-        resolve(false)
-      }
-    }
-  })
-}
+// async function isExistingId (idUser) {
+//   return new Promise((resolve, reject) => {
+//     console.log(!data.users.findByPk(idUser))
+//     return !!data.users.findByPk(idUser)
+//   }
+//   )
+// }
 
 async function getUserById (idUser) {
   return new Promise((resolve, reject) => {
-    for (const item of data) {
-      if (item.id === idUser) {
-        resolve(item)
-      }
-    }
+    users.findByPk(idUser).then(data => {
+      const user = data.get({ plain: true })
+      resolve(user)
+    })
   })
 }
 
 async function UpdateUser (idUser, userData) {
+  // aqui preciso dar os selects
   return new Promise((resolve, reject) => {
-    let updatedUserData
-    for (const item of data) {
-      if (item.id === idUser) {
-        item.id = userData.id ? userData.id : userData.id
-        item.first_name = userData.first_name
-        item.last_name = userData.last_name
-        item.email = userData.email
-        item.gender = userData.gender ? userData.gender : null
-        item.ip_address = userData.ip_address ? userData.ip_address : null
-        console.log(item)
-        updatedUserData = item
-        break
-      }
-    }
-    fs.writeFileSync('mock_data.json', JSON.stringify(data, null, '\t'))
-    resolve(updatedUserData)
+    const user =
+            users.update({
+              id: idUser,
+              first_name: userData.first_name,
+              last_name: userData.last_name,
+              email: userData.email,
+              gender: userData.gender ? userData.gender : null,
+              ip_address: userData.ip_address ? userData.ip_address : null,
+              createdAt: new Date(),
+              updatedAt: new Date()
+
+            },
+            { where: users.id === 5 })
+    console.log()
+
+    resolve(user)
   })
 }
 
 async function createUser (userData) {
-  userData.id = data.length + 1 + ''
-  userData.gender = userData.gender ? userData.gender : null
-  userData.ip_address = userData.ip_address ? userData.ip_address : null
+  const user =
+        users.build({
+          id: '',
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          email: userData.email,
+          gender: userData.gender ? userData.gender : null,
+          ip_address: userData.ip_address ? userData.ip_address : null,
+          createdAt: new Date(),
+          updatedAt: new Date()
 
-  data.push(userData)
-  console.log(userData)
-
-  await fsAsync.writeFile('mock_data.json', JSON.stringify(data, null, '\t'))
+        })
+  console.log()
+  console.log(user.toJSON())
+  await user.save()
   return userData
 }
 
-module.exports = { getUsers, getUserById, UpdateUser, createUser, isExistingId }
+module.exports = { getUsers, getUserById, UpdateUser, createUser }
