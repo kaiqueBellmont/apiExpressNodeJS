@@ -47,7 +47,8 @@ const User = sequelize.define('users', {
   // Other model options go here
   dateStrings: true,
   typeCast: true,
-  timezone: 'GMT-3'
+  timezone: 'GMT-3',
+  timestamps: true
 })
 // User.sync()
 const users = User

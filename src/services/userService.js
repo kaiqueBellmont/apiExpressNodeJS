@@ -1,69 +1,56 @@
 const data = require('../models/userModel')
 
-// const fsAsync = require('fs/promises')
 const users = data.users
 
 function getUsers () {
   return new Promise((resolve) => {
-    resolve(users.findAll())
+    resolve(users.findAll({ order: ['id'] }))
   })
 }
 
-// async function isExistingId (idUser) {
-//   return new Promise((resolve, reject) => {
-//     console.log(!data.users.findByPk(idUser))
-//     return !!data.users.findByPk(idUser)
-//   }
-//   )
-// }
-
 async function getUserById (idUser) {
-  return new Promise((resolve, reject) => {
-    users.findByPk(idUser).then(data => {
-      const user = data.get({ plain: true })
-      resolve(user)
-    })
-  })
+  return users.findByPk(idUser)
 }
 
 async function UpdateUser (idUser, userData) {
-  // aqui preciso dar os selects
-  return new Promise((resolve, reject) => {
-    const user =
-            users.update({
-              id: idUser,
-              first_name: userData.first_name,
-              last_name: userData.last_name,
-              email: userData.email,
-              gender: userData.gender ? userData.gender : null,
-              ip_address: userData.ip_address ? userData.ip_address : null,
-              createdAt: new Date(),
-              updatedAt: new Date()
+  const user = await getUserById(idUser)
+  let gender = userData.gender
+  let ipAdress = userData.ip_address
 
-            },
-            { where: users.id === 5 })
-    console.log()
+  if (gender === null || gender === '') {
+    gender = user.gender
+  } else {
+    gender = userData.gender
+  }
 
-    resolve(user)
+  if (ipAdress === null || ipAdress === '') {
+    ipAdress = user.ip_address
+  } else {
+    ipAdress = userData.ip_address
+  }
+
+  return user.update({
+    first_name: userData.first_name,
+    last_name: userData.last_name,
+    email: userData.email,
+    gender: gender,
+    ip_address: ipAdress
+
   })
 }
 
 async function createUser (userData) {
   const user =
-        users.build({
-          id: '',
+        await users.create({
           first_name: userData.first_name,
           last_name: userData.last_name,
           email: userData.email,
           gender: userData.gender ? userData.gender : null,
-          ip_address: userData.ip_address ? userData.ip_address : null,
-          createdAt: new Date(),
-          updatedAt: new Date()
+          ip_address: userData.ip_address ? userData.ip_address : null
 
         })
   console.log()
   console.log(user.toJSON())
-  await user.save()
   return userData
 }
 
