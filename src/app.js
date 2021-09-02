@@ -12,7 +12,7 @@ APP.get('/', (req, res) => {
 
 APP.use('/api/v1/', routes)
 
-APP.listen(3020, () => console.log('Example app listening on port 3000!'))
+APP.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 module.exports = {
   APP
