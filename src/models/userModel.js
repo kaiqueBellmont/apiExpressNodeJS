@@ -1,20 +1,17 @@
 const { Sequelize, DataTypes } = require('sequelize')
-
-// Option 1: Passing a connection URI
-
-// Option 2: Passing parameters separately (other dialects)
-const sequelize = new Sequelize('ApiNode', 'kaiquecosta', 'Python@$123', {
+// Aqui preciso enviar as variaveis de ambiente no lugar da senha
+const SEQUELIZE = new Sequelize('ApiNode', 'kaiquecosta', 'Python@$123', {
   host: 'localhost',
   dialect: 'postgres',
   timezone: '-03:00'
 })
 try {
-  sequelize.authenticate().then(() => console.log('Connection has been established successfully.'))
+  SEQUELIZE.authenticate().then(() => console.log('Connection has been established successfully.'))
 } catch (error) {
   console.error('Unable to connect to the database:', error)
 }
 
-const User = sequelize.define('users', {
+const USER = SEQUELIZE.define('users', {
   // Model attributes are defined here
   id: {
     type: DataTypes.INTEGER,
@@ -50,10 +47,7 @@ const User = sequelize.define('users', {
   timezone: 'GMT-3',
   timestamps: true
 })
-// User.sync()
-const users = User
 
-// `sequelize.define` also returns the model
-console.log(User === sequelize.models.users) // true
+const USERS = USER
 
-module.exports = { users }
+module.exports = { USERS }

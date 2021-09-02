@@ -3,12 +3,12 @@ const { userDataFormatting } = require('../src/middlewares/userDataFormattingMid
 const { existsUser } = require('../src/middlewares/userVerificationMiddleware')
 const { getUsers, getUsersById, UpdateUser, createUser } = require('../src/controllers/userController')
 
-const router = require('express').Router()
+const ROUTER = require('express').Router()
 
 // User Routes
-router.get('/users', getUsers, userDataFormatting)
-router.get('/users/:id', existsUser, getUsersById, userDataFormatting)
-router.put('/users/:id', validateUpdateUser, UpdateUser)
-router.post('/users', validateCreateUser, createUser)
+ROUTER.get('/users', getUsers, userDataFormatting)
+ROUTER.get('/users/:id', existsUser, getUsersById, userDataFormatting)
+ROUTER.put('/users/:id', validateUpdateUser, UpdateUser)
+ROUTER.post('/users', validateCreateUser, createUser)
 
-module.exports = router
+module.exports = ROUTER

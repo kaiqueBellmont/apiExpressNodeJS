@@ -1,18 +1,18 @@
-const express = require('express')
-const app = express()
+const EXPRESS = require('express')
+const APP = EXPRESS()
 const routes = require('../../apiExpressNodeJS/routes/userRoutes')
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+APP.use(EXPRESS.json())
+APP.use(EXPRESS.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => {
+APP.get('/', (req, res) => {
   res.send('Olá, este é o local host')
 })
 
-app.use('/api/v1/', routes)
+APP.use('/api/v1/', routes)
 
-app.listen(3020, () => console.log('Example app listening on port 3000!'))
+APP.listen(3020, () => console.log('Example app listening on port 3000!'))
 
 module.exports = {
-  app
+  APP
 }

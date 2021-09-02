@@ -1,22 +1,22 @@
 function validateData (body, res) {
   if (body.first_name.length <= 0) {
-    res.status(400).json({ status: 400, message: "O campo 'first_name' está vazio" })
+    res.status(400).json({ status: 400, message: "missing field: 'first_name' " })
   }
 
   if (body.last_name.length <= 0) {
-    res.status(400).json({ status: 400, message: "O campo 'Last_name' está vazio" })
+    res.status(400).json({ status: 400, message: "missing field: 'last_name' " })
   }
 
   if (body.email.length <= 0) {
-    res.status(400).json({ status: 400, message: "O campo 'email' está vazio" })
+    res.status(400).json({ status: 400, message: "missing field: 'email " })
   }
 }
 
 function validateUpdateUser (req, res, next) {
-  const body = req.body
+  const BODY = req.body
 
   try {
-    validateData(body)
+    validateData(BODY)
     return next()
   } catch (e) {
     res.status(400).json({ status: 400, message: e.message })
@@ -24,10 +24,10 @@ function validateUpdateUser (req, res, next) {
 }
 
 function validateCreateUser (req, res, next) {
-  const body = req.body
+  const BODY = req.body
 
   try {
-    validateData(body)
+    validateData(BODY)
     return next()
   } catch (e) {
     res.status(400).json({ status: 400, message: e.message })

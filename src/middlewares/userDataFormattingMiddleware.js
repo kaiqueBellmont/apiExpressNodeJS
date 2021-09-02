@@ -9,20 +9,20 @@ exports.userDataFormatting = async (req, res, next) => {
   } else {
     const CLONED_USER = []
 
-    for (const item of USER) {
-      removeFields(item, FIELDS)
-      CLONED_USER.push(item.toJSON())
+    for (const ITEM of USER) {
+      removeFields(ITEM, FIELDS)
+      CLONED_USER.push(ITEM.toJSON())
     }
 
-    for (const item of CLONED_USER) {
-      removeFields(item, FIELDS)
+    for (const ITEM of CLONED_USER) {
+      removeFields(ITEM, FIELDS)
     }
     return res.status(200).json(CLONED_USER)
   }
 }
 
 function removeFields (user, fields) {
-  for (const field of fields) {
-    delete user[field]
+  for (const FIELD of fields) {
+    delete user[FIELD]
   }
 }

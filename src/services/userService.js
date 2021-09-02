@@ -1,35 +1,34 @@
-const data = require('../models/userModel')
+const DATA = require('../models/userModel')
 
-const users = data.users
+const USERS = DATA.USERS
 
 function getUsers () {
   return new Promise((resolve) => {
-    resolve(users.findAll({ order: ['id'] }))
+    resolve(USERS.findAll({ order: ['id'] }))
   })
 }
 
 async function getUserById (idUser) {
-  return users.findByPk(idUser)
+  return USERS.findByPk(idUser)
 }
 
 async function UpdateUser (idUser, userData) {
-  const user = await getUserById(idUser)
+  const USER = await getUserById(idUser)
   let gender = userData.gender
   let ipAdress = userData.ip_address
 
-  if (gender === null || gender === '') {
-    gender = user.gender
+  if (gender === null || gender === '' || ipAdress === undefined) {
+    gender = USER.gender
   } else {
     gender = userData.gender
   }
 
-  if (ipAdress === null || ipAdress === '') {
-    ipAdress = user.ip_address
+  if (ipAdress === null || ipAdress === '' || ipAdress === undefined) {
+    ipAdress = USER.ip_address
   } else {
     ipAdress = userData.ip_address
   }
-
-  return user.update({
+  return USER.update({
     first_name: userData.first_name,
     last_name: userData.last_name,
     email: userData.email,
@@ -40,8 +39,8 @@ async function UpdateUser (idUser, userData) {
 }
 
 async function createUser (userData) {
-  const user =
-        await users.create({
+  const USER =
+        await USERS.create({
           first_name: userData.first_name,
           last_name: userData.last_name,
           email: userData.email,
@@ -50,7 +49,7 @@ async function createUser (userData) {
 
         })
   console.log()
-  console.log(user.toJSON())
+  console.log(USER.toJSON())
   return userData
 }
 

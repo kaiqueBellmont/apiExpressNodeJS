@@ -1,4 +1,4 @@
-const userService = require('../../src/services/userService')
+const USER_SERVICE = require('../../src/services/userService')
 
 function defaultResponse (res, data) {
   return res.status(200).json(data)
@@ -6,7 +6,7 @@ function defaultResponse (res, data) {
 
 exports.getUsers = async (req, res, next) => {
   try {
-    res.locals.user = await userService.getUsers()
+    res.locals.user = await USER_SERVICE.getUsers()
 
     return next()
   } catch (e) {
@@ -16,7 +16,7 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getUsersById = async (req, res, next) => {
   try {
-    res.locals.user = await userService.getUserById(req.params.id)
+    res.locals.user = await USER_SERVICE.getUserById(req.params.id)
 
     return next()
   } catch (e) {
@@ -25,10 +25,9 @@ exports.getUsersById = async (req, res, next) => {
 }
 
 exports.UpdateUser = async (req, res) => {
-  // comparar informações do payload
   try {
-    const user = await userService.UpdateUser(req.params.id, req.body)
-    return defaultResponse(res, user)
+    const USER = await USER_SERVICE.UpdateUser(req.params.id, req.body)
+    return defaultResponse(res, USER)
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message })
   }
@@ -36,8 +35,8 @@ exports.UpdateUser = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const newUser = await userService.createUser(req.body)
-    return res.status(200).json(newUser)
+    const NEW_USER = await USER_SERVICE.createUser(req.body)
+    return res.status(200).json(NEW_USER)
   } catch (e) {
     return res.status(400).json({ message: e.message })
   }
