@@ -1,3 +1,4 @@
+// middleware needed to format data and deliver only relevant fields in response
 exports.userDataFormatting = async (req, res, next) => {
   const FIELDS = ['gender', 'ip_address', 'createdAt', 'updatedAt']
   const USER = res.locals.user

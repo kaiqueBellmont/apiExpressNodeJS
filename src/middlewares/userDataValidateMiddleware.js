@@ -1,3 +1,4 @@
+// middleware needed to validate the required fields of the request
 function validateData (body, res) {
   if (body.first_name.length <= 0) {
     res.status(400).json({ status: 400, message: "missing field: 'first_name' " })

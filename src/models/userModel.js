@@ -1,3 +1,4 @@
+// model responsible for creating the users schema
 const { Sequelize, DataTypes } = require('sequelize')
 // Aqui preciso enviar as variaveis de ambiente no lugar da senha
 const SEQUELIZE = new Sequelize('ApiNode', 'kaiquecosta', 'Python@$123', {

@@ -1,3 +1,4 @@
+// middleware needed to verify the existence of a user in the database
 const USER_SERVICE = require('../services/userService')
 
 exports.existsUser = async function (req, res, next) {

@@ -1,3 +1,4 @@
+// file responsible for creating the server and pre-defining routes
 const EXPRESS = require('express')
 const APP = EXPRESS()
 const routes = require('../../apiExpressNodeJS/routes/userRoutes')

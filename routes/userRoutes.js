@@ -1,3 +1,4 @@
+// creates routes and communicates with middlewares and controllers
 const { validateUpdateUser, validateCreateUser } = require('../src/middlewares/userDataValidateMiddleware')
 const { userDataFormatting } = require('../src/middlewares/userDataFormattingMiddleware')
 const { existsUser } = require('../src/middlewares/userVerificationMiddleware')

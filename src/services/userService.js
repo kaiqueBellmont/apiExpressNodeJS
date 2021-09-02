@@ -1,3 +1,5 @@
+// file responsible for user service
+// contains the business logic and communicates with the userModel
 const DATA = require('../models/userModel')
 
 const USERS = DATA.USERS
@@ -39,17 +41,15 @@ async function UpdateUser (idUser, userData) {
 }
 
 async function createUser (userData) {
-  const USER =
-        await USERS.create({
-          first_name: userData.first_name,
-          last_name: userData.last_name,
-          email: userData.email,
-          gender: userData.gender ? userData.gender : null,
-          ip_address: userData.ip_address ? userData.ip_address : null
+  await USERS.create({
+    first_name: userData.first_name,
+    last_name: userData.last_name,
+    email: userData.email,
+    gender: userData.gender ? userData.gender : null,
+    ip_address: userData.ip_address ? userData.ip_address : null
 
-        })
-  console.log()
-  console.log(USER.toJSON())
+  })
+
   return userData
 }
 
