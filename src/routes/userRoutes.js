@@ -1,8 +1,8 @@
 // creates routes and communicates with middlewares and controllers
-const { validateUpdateUser, validateCreateUser } = require('../src/middlewares/userDataValidateMiddleware')
-const { userDataFormatting } = require('../src/middlewares/userDataFormattingMiddleware')
-const { existsUser } = require('../src/middlewares/userVerificationMiddleware')
-const { getUsers, getUsersById, UpdateUser, createUser } = require('../src/controllers/userController')
+const { validateUpdateUser, validateCreateUser } = require('../middlewares/userDataValidateMiddleware')
+const { userDataFormatting } = require('../middlewares/userDataFormattingMiddleware')
+const { existsUser } = require('../middlewares/userVerificationMiddleware')
+const { getUsers, getUsersById, UpdateUser, createUser } = require('../controllers/userController')
 
 const ROUTER = require('express').Router()
 

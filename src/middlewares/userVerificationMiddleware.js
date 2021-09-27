@@ -2,7 +2,7 @@
 const USER_SERVICE = require('../services/userService')
 
 exports.existsUser = async function (req, res, next) {
-  const EXISTS = (await USER_SERVICE.getUserById(req.params.id))
+  const EXISTS = await USER_SERVICE.getUserById(req.params.id)
   if (EXISTS) {
     return next()
   }

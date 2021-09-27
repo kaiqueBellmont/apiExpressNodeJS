@@ -1,23 +1,11 @@
 // model responsible for creating the users schema
-const { Sequelize, DataTypes } = require('sequelize')
-// Aqui preciso enviar as variaveis de ambiente no lugar da senha
-const SEQUELIZE = new Sequelize('ApiNode', 'kaiquecosta', 'Python@$123', {
-  host: 'localhost',
-  dialect: 'postgres',
-  timezone: '-03:00'
-})
-try {
-  SEQUELIZE.authenticate().then(() => console.log('Connection has been established successfully.'))
-} catch (error) {
-  console.error('Unable to connect to the database:', error)
-}
+const SEQUELIZE = require('../models/index')
+const { DataTypes } = require('sequelize')
 
 const USER = SEQUELIZE.define('users', {
-  // Model attributes are defined here
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    allowNull: false,
     autoIncrement: true
   },
   first_name: {

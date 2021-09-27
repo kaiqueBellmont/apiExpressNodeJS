@@ -1,6 +1,7 @@
 // middleware needed to format data and deliver only relevant fields in response
-exports.userDataFormatting = async (req, res, next) => {
-  const FIELDS = ['gender', 'ip_address', 'createdAt', 'updatedAt']
+const FIELDS = ['gender', 'ip_address', 'createdAt', 'updatedAt']
+
+exports.userDataFormatting = async (req, res) => {
   const USER = res.locals.user
 
   if (!Array.isArray(USER)) {
@@ -11,13 +12,11 @@ exports.userDataFormatting = async (req, res, next) => {
     const CLONED_USER = []
 
     for (const ITEM of USER) {
-      removeFields(ITEM, FIELDS)
-      CLONED_USER.push(ITEM.toJSON())
+      const item = ITEM.toJSON()
+      removeFields(item, FIELDS)
+      CLONED_USER.push(item)
     }
 
-    for (const ITEM of CLONED_USER) {
-      removeFields(ITEM, FIELDS)
-    }
     return res.status(200).json(CLONED_USER)
   }
 }

@@ -4,28 +4,27 @@ const DATA = require('../models/userModel')
 
 const USERS = DATA.USERS
 
-function getUsers () {
-  return new Promise((resolve) => {
-    resolve(USERS.findAll({ order: ['id'] }))
-  })
+async function getUsers () {
+  return USERS.findAll({ order: ['id'] })
 }
 
 async function getUserById (idUser) {
   return USERS.findByPk(idUser)
 }
 
+// toda vez que for update, começar com um objeto em branco
 async function UpdateUser (idUser, userData) {
   const USER = await getUserById(idUser)
   let gender = userData.gender
   let ipAdress = userData.ip_address
 
-  if (gender === null || gender === '' || ipAdress === undefined) {
+  if (gender) {
     gender = USER.gender
   } else {
     gender = userData.gender
   }
 
-  if (ipAdress === null || ipAdress === '' || ipAdress === undefined) {
+  if (ipAdress) {
     ipAdress = USER.ip_address
   } else {
     ipAdress = userData.ip_address
@@ -49,7 +48,7 @@ async function createUser (userData) {
     ip_address: userData.ip_address ? userData.ip_address : null
 
   })
-
+  console.log(userData)
   return userData
 }
 
