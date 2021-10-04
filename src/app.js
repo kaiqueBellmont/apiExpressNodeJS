@@ -9,10 +9,10 @@ APP.use(EXPRESS.urlencoded({ extended: true }))
 APP.get('/', (req, res) => {
   res.send('Olá, este é o local host')
 })
-
+const port = 3000
 APP.use('/api/v1/', ROUTES)
 
-APP.listen(3000, () => console.log('Example app listening on port 3000!'))
+APP.listen(port, () => console.log(`Example app listening on ${port}!`))
 
 module.exports = {
   APP
