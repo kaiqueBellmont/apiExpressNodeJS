@@ -14,6 +14,4 @@ APP.use('/api/v1/', ROUTES)
 
 APP.listen(port, () => console.log(`Example app listening on ${port}!`))
 
-module.exports = {
-  APP
-}
+module.exports = APP

@@ -13,10 +13,10 @@ async function getUserById (idUser) {
 }
 
 // toda vez que for update, começar com um objeto em branco
-async function UpdateUser (idUser, userData) {
+async function updateUser (idUser, userData) {
   const USER = await getUserById(idUser)
   let gender = userData.gender
-  let ipAdress = userData.ip_address
+  let ipAddress = userData.ip_address
 
   if (gender) {
     gender = USER.gender
@@ -24,17 +24,17 @@ async function UpdateUser (idUser, userData) {
     gender = userData.gender
   }
 
-  if (ipAdress) {
-    ipAdress = USER.ip_address
+  if (ipAddress) {
+    ipAddress = USER.ip_address
   } else {
-    ipAdress = userData.ip_address
+    ipAddress = userData.ip_address
   }
   return USER.update({
     first_name: userData.first_name,
     last_name: userData.last_name,
     email: userData.email,
     gender: gender,
-    ip_address: ipAdress
+    ip_address: ipAddress
 
   })
 }
@@ -48,8 +48,7 @@ async function createUser (userData) {
     ip_address: userData.ip_address ? userData.ip_address : null
 
   })
-  console.log(userData)
   return userData
 }
 
-module.exports = { getUsers, getUserById, UpdateUser, createUser }
+module.exports = { getUsers, getUserById, updateUser, createUser }

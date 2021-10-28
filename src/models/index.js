@@ -1,5 +1,10 @@
+const DATABASE = require('../../config/database')
+const USERNAME = DATABASE.username
+const DATABASE_NAME = DATABASE.database
+const PASSWORD = DATABASE.password
+
 const { Sequelize } = require('sequelize')
-const SEQUELIZE = new Sequelize('ApiNode', 'kaiquecosta', 'Python@$123', {
+const SEQUELIZE = new Sequelize(DATABASE_NAME, USERNAME, PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
   timezone: '-03:00'

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' })
+require('dotenv')
 
 module.exports = {
   username: process.env.DB_USER || 'postgres',
